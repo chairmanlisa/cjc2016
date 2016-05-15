@@ -1,0 +1,385 @@
+
+# coding: utf-8
+
+# In[1]:
+
+import random, datetime
+import numpy as np
+import pylab as plt
+import statsmodels.api as sm
+from scipy.stats import norm
+from scipy.stats.stats import pearsonr
+
+
+# # VARIABLE TYPE
+
+# In[2]:
+
+str(3)
+
+
+# In[3]:
+
+int('5')
+
+
+# In[5]:
+
+float('6.4')
+
+
+# In[6]:
+
+range(22)
+
+
+# In[7]:
+
+range(1,22)
+
+
+# # DIR
+
+# In[8]:
+
+dir
+
+
+# In[9]:
+
+dir(str)[-5:]
+
+
+# In[10]:
+
+x='Nice to Meet YOU'
+dir(x)[-10]
+
+
+# In[11]:
+
+x='Nice to Meet YOU'
+dir(x)[-10:]
+
+
+# In[13]:
+
+x.lower()
+
+
+# In[14]:
+
+x.upper()
+
+
+# In[15]:
+
+x.rstrip()
+
+
+# In[16]:
+
+x.strip()
+
+
+# # TYPE
+
+# In[17]:
+
+x ='nice to meet you'
+type(x)
+
+
+# # DATA STRUCTURE
+
+# In[18]:
+
+l=[1,2,3,3]
+t=(1,2,3,3)
+s=set([1,2,3,3])
+d={'a':1,'b':2,'c':3}
+a=np.array(l)
+print l,t,s,d,a
+
+
+# In[19]:
+
+l=[1,2,3,3]
+l.append(43)
+l
+
+
+# In[20]:
+
+print l
+
+
+# In[21]:
+
+d={'a':1,'b':2,'c':3}
+d.keys()
+
+
+# In[22]:
+
+d.values()
+
+
+# In[23]:
+
+d={'a':1,'b':2,'c':3}
+d['b']
+
+
+# In[25]:
+
+d.items()
+
+
+# # 定义函数
+
+# In[32]:
+
+def devidePlus(m,n):
+    return float(m)/n+1
+
+
+# # For循环
+
+# In[27]:
+
+range(10)
+
+
+# In[28]:
+
+range(1,20)
+
+
+# In[29]:
+
+for i in range(10):
+    print i,i*10,i**3
+
+
+# In[33]:
+
+for i in range(10):
+    print devidePlus(i,2)
+
+
+# In[36]:
+
+r=[devidePlus(i,2) for i in range (10)]
+print r
+
+
+# In[37]:
+
+r=[devidePlus(i,2) for i in range (10)]
+r
+
+
+# # map
+
+# In[38]:
+
+map(devidePlus,[4,2],[2,1])
+
+
+# # if elif else
+
+# In[39]:
+
+j=3
+if j%2==1:
+    print r'余数是1'
+elif j%2==2:
+    print r'余数是2'
+else:
+    print r'余数既不是1也不是2'
+
+
+# In[40]:
+
+x=5
+if x<5:
+    y=-1
+    z=5
+elif x>5:
+    y=1
+    z=11
+else:
+    y=0
+    z=10
+print(x,y,z)
+
+
+# # While循环
+
+# In[41]:
+
+j=0
+while j<10:
+    print j
+    j+=1
+
+
+# In[43]:
+
+j=0
+while j<10:
+    if j%2 != 0:
+        print j**2
+    j+=1
+
+
+# In[44]:
+
+j=0
+while j<50:
+    if j==30:
+        break
+    if j%2 !=0:
+        print j**2
+    j+=1
+
+
+# In[45]:
+
+a=4
+while a:
+    print a
+    a-=1
+    if a <0:
+        a=None
+
+
+# # TRY EXCEPT
+
+# In[46]:
+
+for i in [2,0,5]:
+    try:
+        print devidePlus(4,i)
+    except Exception,e:
+        print e
+        pass
+
+
+# # WRITE AND READ DATA
+
+# In[47]:
+
+data = [[i,i**2,i**3] for i in range(10)]
+data
+
+
+# In[48]:
+
+for i in data:
+    print'\t'.join(map(str,i))
+
+
+# In[49]:
+
+type(data)
+
+
+# In[50]:
+
+len(data)
+
+
+# In[51]:
+
+data[0]
+
+
+# In[54]:
+
+data=[[i,i**2,i**3]for i in range(10000)]
+f = open("/Users/lisa/Desktop/data_write_to_file.txt", "wb")
+for i in data:
+    f.write('\t'.join(map(str,i)) + '\n')
+f.close()
+
+
+# In[55]:
+
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    data = f.readlines()
+data[:5]
+
+
+# In[56]:
+
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    data = f.readlines(1000)
+len(data)
+
+
+# In[57]:
+
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    print f.readline()
+
+
+# In[58]:
+
+f=[1,2,3,4,5]
+for k,i in enumerate(f):
+    print k,i
+
+
+# In[59]:
+
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    for i in f:
+        print i
+
+
+# In[61]:
+
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    for k,i in enumerate(f):
+        if k%1000 == 0:
+            print i
+
+
+# In[64]:
+
+data=[]
+line='0\t0\t0\n'
+line=line.replace('\n','').split('\t')
+#line=line.split('\t')
+line=[int(i) for i in line]
+data.append(line)
+data
+
+
+# In[66]:
+
+data=[]
+with open('/Users/lisa/Desktop/data_write_to_file.txt','r')as f:
+    for line in f:
+        data.append(line)
+data
+
+
+# In[67]:
+
+#读取数据
+data=[]
+with open ('/Users/lisa/Desktop/data_write_to_file.txt','r') as f:
+    for line in f:
+        line=line.replace('\n','').split('\t')
+        line=[int(i) for i in line]
+        data.append(line)
+data
+
+
+# In[ ]:
+
+
+
